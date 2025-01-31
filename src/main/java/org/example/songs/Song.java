@@ -4,20 +4,20 @@ import java.io.InputStream;
 
 public class Song {
 
-    private final InputStream songStream;
+    private final String songLocation;
 
     private final String name;
     public Song(String location, String name){
         this.name = name;
 
-        this.songStream = getClass().getClassLoader().getResourceAsStream(location);
+        this.songLocation = location;
     }
 
     public String getName(){
         return this.name;
     }
 
-    public InputStream getSongStream(){
-        return this.songStream;
+    public InputStream getSongLocation(){
+        return getClass().getClassLoader().getResourceAsStream(this.songLocation);
     }
 }
