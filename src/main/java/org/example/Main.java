@@ -12,9 +12,9 @@ public class Main {
         playlist.addSong(new Song("missyou.mp3", "missyou"));
 
         System.out.println(playlist.getSong(0).getName());
-        AudioInterface play = AudioInterface.getInstance();
-        play.playSong("alienboy.mp3");
+        AudioInterface player = AudioInterface.getInstance();
+        player.playSong(playlist.getSong(0).getSongStream());
         TimeUnit.SECONDS.sleep(2);
-        play.playSong("cowboys.mp3");
+        player.playSong(playlist.getSong(1).getSongStream());
     }
 }

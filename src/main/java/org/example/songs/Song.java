@@ -17,7 +17,7 @@ public class Song {
         return this.name;
     }
 
-    public InputStream getLocation(){
+    public InputStream getSongStream(){
         return this.songStream;
     }
 }
