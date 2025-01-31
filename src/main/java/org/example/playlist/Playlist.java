@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import org.example.songs.Song;
 import org.example.playlist.Position;
 public class Playlist extends Position{
-    private ArrayList<Song> playlist = new ArrayList<>();
+    private final ArrayList<Song> playlist = new ArrayList<>();
 
     private String playlist_name;
     public Playlist(String name){
