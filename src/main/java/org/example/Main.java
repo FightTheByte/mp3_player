@@ -13,8 +13,8 @@ public class Main {
 
         System.out.println(playlist.getSong(0).getName());
         AudioInterface player = AudioInterface.getInstance();
-        player.playSong(playlist.getSong(0).getSongStream());
+        player.playSong(playlist.getSong(0).getSongStream(), false);
         TimeUnit.SECONDS.sleep(2);
-        player.playSong(playlist.getSong(1).getSongStream());
+        player.playSong(playlist.getSong(1).getSongStream(), true);
     }
 }
