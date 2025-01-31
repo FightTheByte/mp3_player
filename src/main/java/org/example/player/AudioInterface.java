@@ -33,15 +33,16 @@ public class AudioInterface {
                 pausedOnFrame = 0;
             }
             runningPlayer = new AdvancedPlayer(inputStream);
+            runningPlayer.setPlayBackListener(new PlaybackListener() {
+                @Override
+                public void playbackFinished(PlaybackEvent evt) {
+                    pausedOnFrame = evt.getFrame();
+                    System.out.println(pausedOnFrame);
+                    System.out.println("here");
+                }
+            });
             playerThread = new Thread(() ->{
                 try{
-                    runningPlayer.setPlayBackListener(new PlaybackListener() {
-                        @Override
-                        public void playbackFinished(PlaybackEvent evt) {
-                            super.playbackFinished(evt);
-                            pausedOnFrame = evt.getFrame();
-                        }
-                    });
                     runningPlayer.play(pausedOnFrame, Integer.MAX_VALUE);
                 } catch(Exception e){
                     System.out.println(e);
@@ -54,6 +55,9 @@ public class AudioInterface {
         }
     }
 
-
+    public void pauseSong(){
+        runningPlayer.stop();
+        playerThread.interrupt();
+    }
 
 }
