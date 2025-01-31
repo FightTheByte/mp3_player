@@ -35,7 +35,7 @@ public class AudioInterface {
             });
             playerThread.start();
 
-        } catch(Exception e){
+        } catch(JavaLayerException e){
             System.out.println(e);
         }
     }
