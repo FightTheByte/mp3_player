@@ -1,6 +1,7 @@
 package org.example.player;
-import java.io.InputStream;
+
 import org.example.player.Gui;
+import org.example.player.AudioInterface;
 
 public class Mp3Player implements PlayerActions {
     private static Mp3Player mp3Player;
@@ -38,7 +39,7 @@ public class Mp3Player implements PlayerActions {
 
     }
     @Override
-    public void addSong(String name, InputStream songStream){
+    public void addSong(String name, String songLocation){
 
     }
 
