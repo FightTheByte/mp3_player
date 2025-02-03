@@ -1,18 +1,20 @@
 package org.example.player;
 import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicLong;
+import javazoom.spi.mpeg.sampled.file.MpegAudioFileFormat;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.player.advanced.PlaybackListener;
+import javax.sound.sampled.*;
 
 
-public class AudioInterface {
+public class AudioInterface implements LineListener {
     private static AudioInterface audio_interface;
+    private static AudioInputStream audioInputStream;
 
-    private static int pausedOnFrame = 0;
+    private static Clip audioclip;
+    boolean isCompleted;
+    private int pausedOnFrame = 0;
     private static Thread playerThread;
-    private static AdvancedPlayer runningPlayer;
+
     private AudioInterface(){}
 
     public static AudioInterface getInstance(){
@@ -22,42 +24,54 @@ public class AudioInterface {
         return audio_interface;
     }
 
+    @Override
+    public void update(LineEvent event){
+        if(LineEvent.Type.START == event.getType()){
+            System.out.println("Playing");
+        } else if(LineEvent.Type.STOP == event.getType()){
+            System.out.println("Stopping");
+        }
+    }
+
     public void playSong(InputStream inputStream, boolean newSong){
 
         try{
-            if(runningPlayer != null){
-                runningPlayer.close();
-                playerThread.interrupt();
-            }
             if(newSong){
-                pausedOnFrame = 0;
+                audioInputStream = AudioSystem.getAudioInputStream(inputStream);
+                AudioFormat audioFormat = MpegAudioFileReader
+                DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
+                audioclip = (Clip) AudioSystem.getLine(info);
+                audioclip.addLineListener(this);
+                audioclip.open(audioInputStream);
+
             }
-            runningPlayer = new AdvancedPlayer(inputStream);
-            runningPlayer.setPlayBackListener(new PlaybackListener() {
-                @Override
-                public void playbackFinished(PlaybackEvent evt) {
-                    pausedOnFrame = evt.getFrame();
-                    System.out.println(pausedOnFrame);
-                    System.out.println("here");
+            if(playerThread != null){
+                if (!playerThread.isInterrupted() && newSong) {
+                    playerThread.interrupt();
+                    System.out.println("new song");
                 }
-            });
+            }
+
+
             playerThread = new Thread(() ->{
                 try{
-                    runningPlayer.play(pausedOnFrame, Integer.MAX_VALUE);
+                    audioclip.start();
                 } catch(Exception e){
                     System.out.println(e);
                 }
             });
             playerThread.start();
 
-        } catch(JavaLayerException e){
+        } catch(Exception e){
             System.out.println(e);
         }
     }
 
-    public void pauseSong(){
-        runningPlayer.stop();
-        playerThread.interrupt();
+    public void pause() {
+        if (!playerThread.isInterrupted()) {
+                audioclip.stop();
+                playerThread.interrupt();
+        }
     }
 
 }
