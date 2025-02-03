@@ -1,6 +1,6 @@
 package org.example.playlist;
 
-public abstract class Position {
+public class Position {
     private int position = 0;
 
     public int getPosition(){
@@ -11,7 +11,25 @@ public abstract class Position {
         this.position = position;
     }
 
-    public abstract void increasePosition(); //increase current playlist position
+    public void increasePosition(int size){
+        int maxPosition = size - 1;
+        int currentPosition = getPosition();
 
-    public abstract void decreasePosition(); //decrease current playlist position
+        if(currentPosition + 1 > maxPosition){
+            setPosition(0);
+        } else {
+            setPosition(currentPosition + 1);
+        }
+    }
+
+    public void decreasePosition(int size){
+        int minPosition = 0;
+        int currentPosition = getPosition();
+
+        if(currentPosition - 1 < minPosition){
+            setPosition(size - 1);
+        } else {
+            setPosition(currentPosition - 1);
+        }
+    }
 }
