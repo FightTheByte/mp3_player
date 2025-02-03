@@ -4,7 +4,9 @@ public class Gui {
     //private final JFrame guiWindow;
 
     private static Gui gui;
-    private Gui(){}
+    private Gui(){
+
+    }
 
     public static Gui getInstance(){
         if(gui == null){
