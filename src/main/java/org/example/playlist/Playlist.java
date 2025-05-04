@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.example.songs.Song;
 import org.example.playlist.Position;
+
+// Define a Playlist class, using loose coupling
 public class Playlist{
     private static List<Song> playlist;
     private String playlist_name;

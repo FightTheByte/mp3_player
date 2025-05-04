@@ -1,5 +1,6 @@
 package org.example.playlist;
 
+// Class to handle playlist position logic
 public class Position {
     private int position = 0;
 

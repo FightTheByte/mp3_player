@@ -1,5 +1,7 @@
 package org.example.player;
 import javax.swing.*;
+
+// Define a GUI using singleton
 public class Gui {
     //private final JFrame guiWindow;
 

@@ -3,6 +3,8 @@ import org.example.player.AudioInterface;
 import org.example.songs.Song;
 import org.example.playlist.Playlist;
 import java.util.concurrent.TimeUnit;
+
+// Main for calling song playing and testing
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 

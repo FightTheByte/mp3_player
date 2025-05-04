@@ -4,7 +4,7 @@ import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
 
 import javax.sound.sampled.*;
 
-
+// Implement the Audio interface, with play pause methods, takes an InputStream
 public class AudioInterface implements LineListener {
     private static AudioInterface audio_interface;
     private static AudioInputStream audioInputStream;

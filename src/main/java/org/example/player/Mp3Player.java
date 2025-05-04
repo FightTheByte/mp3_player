@@ -3,6 +3,7 @@ package org.example.player;
 import org.example.player.Gui;
 import org.example.player.AudioInterface;
 
+// Implements PlayerActions interface to act as a bridge between the GUI and AudioInterface
 public class Mp3Player implements PlayerActions {
     private static Mp3Player mp3Player;
 
