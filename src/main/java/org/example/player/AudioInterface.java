@@ -1,7 +1,6 @@
 package org.example.player;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicLong;
-import javazoom.spi.mpeg.sampled.file.MpegAudioFileFormat;
+import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
 
 import javax.sound.sampled.*;
 
@@ -11,8 +10,6 @@ public class AudioInterface implements LineListener {
     private static AudioInputStream audioInputStream;
 
     private static Clip audioclip;
-    boolean isCompleted;
-    private int pausedOnFrame = 0;
     private static Thread playerThread;
 
     private AudioInterface(){}
@@ -38,7 +35,7 @@ public class AudioInterface implements LineListener {
         try{
             if(newSong){
                 audioInputStream = AudioSystem.getAudioInputStream(inputStream);
-                AudioFormat audioFormat = MpegAudioFileReader
+                AudioFormat audioFormat = audioInputStream.getFormat();
                 DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
                 audioclip = (Clip) AudioSystem.getLine(info);
                 audioclip.addLineListener(this);

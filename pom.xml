@@ -22,6 +22,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
+
+    </repositories>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/javazoom/jlayer -->
         <dependency>
@@ -29,6 +38,13 @@
             <artifactId>jlayer</artifactId>
             <version>1.0.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.umjammer</groupId>
+            <artifactId>mp3spi</artifactId>
+            <version>1.9.17</version>
+        </dependency>
+
     </dependencies>
 
 
